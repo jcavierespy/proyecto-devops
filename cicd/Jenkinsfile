@@ -1,17 +1,22 @@
 pipeline {
     agent any
     stages {
-        stage('node pipeline') {
-            agent {
-                sh sudo docker { image 'node:20.11.1-alpine3.19' }
+        stage('Instalar dependencias') {
+            steps {
+                echo 'Instalando dependencias'
+                sh 'npm install'
             }
-            stages {
-                stage('checkout') {
-                    steps {
-                        echo "hola mundo"
-                    }
-
-                }
+        }
+        stage('Pruebas unitarias') {
+            steps {
+                echo 'Ejecutando pruebas unitarias'
+                sh 'npm run test'
+            }
+        }
+        stage('Traspilar') {
+            steps {
+                echo 'Traspilando proyecto'
+                sh 'npm run build'
             }
         }
     }
