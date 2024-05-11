@@ -4,7 +4,9 @@ pipeline {
         stage('node pipeline') {
             agent {
                 docker { 
-                    image 'node:20.11.1-alpine3.19' }
+                    image 'node:20.11.1-alpine3.19' 
+                    reuseNode true
+                    }
             }
             stages {
                 stage('checkout scm') {
