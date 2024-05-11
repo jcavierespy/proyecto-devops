@@ -36,9 +36,15 @@ pipeline {
         }
         stage('Construir imagen docker') {
             steps {
+            script {
+                docker.withRegistry('http://localhost:8082', nexus-key) {
                 echo 'Construyendo imagen docker'
-                sh 'docker build -t mi-proyecto-devops ./'
+                sh 'docker build -t localhost:8082/mi-proyecto-devops .'
+                sh "docker tag localhost:8082/mi-proyecto-devops localhost:8082/mi-proyecto-devops:${env.BUILD_NUMBER}"
+                sh 'docker push localhost:8082/mi-proyecto-devops'
+                sh "docker push lolcahost:8082/mi-proyecto-devops:${env.BUILD_NUMBER}"
+                }
             }
-        }
+        }    
     }
 }
