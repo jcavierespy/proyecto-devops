@@ -6,6 +6,11 @@ pipeline {
                 docker { image 'node:20.11.1-alpine3.19' }
             }
             stages {
+                sstage('checkout scm') {
+                    steps {
+                        checkout scm
+                    }
+                }
                 stage('Instalar dependencias') {
                     steps {
                         echo 'Instalando dependencias'
