@@ -36,7 +36,7 @@ pipeline {
         stage('Construir imagen docker') {
             steps {
                 echo 'Construyendo imagen docker'
-                sh 'npm run build'
+                sh 'docker build -t mi-proyecto-devops .'
             }
         }
     }
