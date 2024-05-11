@@ -4,9 +4,10 @@ pipeline {
         stage('node pipeline') {
             agent {
                 docker { image 'node:20.11.1-alpine3.19' }
+                reuseNode true
             }
             stages {
-                sstage('checkout scm') {
+                stage('checkout scm') {
                     steps {
                         checkout scm
                     }
@@ -29,6 +30,12 @@ pipeline {
                         sh 'npm run build'
                     }
                 }
+            }
+        }
+        stage('Construir imagen docker') {
+            steps {
+                echo 'Construyendo imagen docker'
+                sh 'npm run build'
             }
         }
     }
