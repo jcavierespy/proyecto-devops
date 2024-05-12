@@ -2,6 +2,7 @@ import express from "express";
 import { dividir, multiplicar, restar, sumar } from "./calcular.js";
 
 const app = express();
+const AMBIENTE = process.env.AMBIENTE || "desconocido"
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -21,5 +22,10 @@ app.post("/calcular", (req, res) => {
   }
   return res.send({ resultado: "hola mundo" });
 });
+
+app.get("/AMBIENTE", (req, res) => {
+  res.send('El sitio está en el ambiente:', ${AMBIENTE} );
+});
+
 
 export default app;
