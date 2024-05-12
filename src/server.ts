@@ -3,6 +3,7 @@ import { dividir, multiplicar, restar, sumar } from "./calcular.js";
 
 const app = express();
 const AMBIENTE = process.env.AMBIENTE || "desconocido"
+const API_KEY = fs.readFileSync('/var/run/secrets/API_KEY', 'utf8');
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -25,6 +26,10 @@ app.post("/calcular", (req, res) => {
 
 app.get("/AMBIENTE", (req, res) => {
   res.send( `El sitio está en el ambiente: ${AMBIENTE}` );
+});
+
+app.get("/api", (req, res) => {
+  res.send( `El sitio está en el ambiente: ${API_KEY}` );
 });
 
 
